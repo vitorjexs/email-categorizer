@@ -1,0 +1,10 @@
+# Backend
+venv/
+.env
+
+# Frontend
+frontend/node_modules/
+build/
+
+# Arquivos temporários
+.DS_Store
