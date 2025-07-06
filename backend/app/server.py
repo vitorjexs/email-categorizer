@@ -78,9 +78,6 @@ def index():
 def arquivos_estaticos(path):
     return send_from_directory(app.static_folder, path)
 
-@app.route('/seutexto', methods=['POST'])
-
-
 @app.route('/classificar-e-responder', methods=['POST'])
 def classificarEmails():
     if 'arquivo' not in request.files:

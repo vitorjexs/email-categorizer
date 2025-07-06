@@ -1,0 +1,15 @@
+runtime: python39
+
+entrypoint: gunicorn backend.app.server:app
+
+handlers:
+  - url: /(.*\.(js|css|png|jpg|ico|svg|json))
+    static_files: ../client/build/\1
+    upload: ../client/build/(.*\.(js|css|png|jpg|ico|svg|json))
+
+  - url: /
+    static_files: ../client/build/index.html
+    upload: ../client/build/index.html
+
+  - url: /.*
+    script: auto
