@@ -65,22 +65,18 @@ def processadorDeTexto(texto):
     textoProcessado = ' '.join(filtro)
     return textoProcessado
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/build', static_url_path='')
 CORS(app)
 
 print('---SERVIDOR HELLO WORLD ATIVO---')
 
-@app.route("/")
-def helloWorld():
-    return jsonify(
-        {
-            "message": "Hello World"
-        }
-    )
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
 
-@app.route('/client/<path:path>')
+@app.route('/<path:path>')
 def arquivos_estaticos(path):
-    return send_from_directory('client', path)
+    return send_from_directory(app.static_folder, path)
 
 @app.route('/seutexto', methods=['POST'])
 
@@ -111,8 +107,4 @@ def classificarEmails():
 
 
 if __name__ == "__main__":
-    #arquivo = 'artigo-5.txt'
-    #textoFinal = processadorDeTexto(arquivo)
-    #print('Teste do Artigo 5º da CF 1988')
-    #print(textoFinal)
-    app.run(debug=True)
+    app.run
